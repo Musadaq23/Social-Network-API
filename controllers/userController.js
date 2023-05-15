@@ -1,4 +1,5 @@
-const { User, Thought } = require('../models');
+const User = require('../models/User');
+const Thought = require('../models/Thought');
 
 module.exports = {
   //get all users
@@ -12,7 +13,7 @@ module.exports = {
   },
 
     //get user by ID
-    getSingleUser(req, res) {
+    getOneUser(req, res) {
       User.findOne({_id: req.params.userId})
           .populate({
             path: 'thoughts',
@@ -94,7 +95,7 @@ module.exports = {
   },
   //delete friend
   deleteFriend(req, res) {
-    User.updateOne(
+    User.updateUser(
         { _id: req.params.userId },
         { $pull: { friends:  req.params.friendId } },
         ).then((user) =>

@@ -1,8 +1,9 @@
 // models/Thought.js
 const mongoose = require('mongoose');
 const { format } = require('date-fns');
+const { Schema, model } = require('mongoose');
 
-const ReactionSchema = new mongoose.Schema({
+const ReactionSchema = new Schema({
   reactionBody: {
     type: String,
     required: true,
@@ -19,7 +20,7 @@ const ReactionSchema = new mongoose.Schema({
   }
 });
 
-const thoughtSchema = new mongoose.Schema({
+const thoughtSchema = new Schema({
     thoughtText: {
       type: String,
       required: true,
@@ -49,6 +50,6 @@ thoughtSchema.virtual('reactionCount').get(function() {
   return this.reactions.length;
 });
 
-const Thought = mongoose.model('Thought', thoughtSchema);
+const Thought = model('Thought', thoughtSchema);
 
 module.exports = Thought;
